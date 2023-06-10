@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+        $('#btnVerificar').click(function() {
+            const username = $('#username').val();
+
+            $.ajax({
+            url: 'http://localhost:9000/verificar-usuario',
+            method: 'POST',
+            data: username,
+            contentType: 'application/xml',
+            dataType: 'xml',
+            success: function(response) {
+                const exists = $(response).find('exists').text();
+
+                if (exists === 'true') {
+                $('#resultado').text('Nome de usuário já existe.');
+                $('#resultado2').text('');
+                } else {
+                    const username = $('#username').val();
+                    const password = $('#password').val();
+                    
+                    $.ajax({
+                    url: 'http://localhost:9000/cadastrar-usuario',
+                    method: 'POST',
+                    data: {username: username, password: password},
+                    contentType: 'application/xml',
+                    dataType: 'xml',
+                    success: function(response) {
+                        $('#resultado').text('Usuário cadastrado com sucesso!');
+                        $('#resultado2').text('');
+                    },
+                    error: function() {
+                        alert('Erro ao cadastrar o usuário.');
+                    }
+                    });
+                }
+            },
+            error: function() {
+                alert('Erro ao verificar o usuário.');
+            }
+            });
+        });
+    
+
+        $('#btnLogin').click(function() {
+            const username = $('#username').val();
+            const password = $('#password').val();
+            $.ajax({
+                    url: 'http://localhost:9000/login-usuario',
+                    method: 'POST',
+                    data: { username: username, password: password },
+                    contentType: 'application/xml',
+                    dataType: 'xml',
+                    success: function(response) {
+                        const success = $(response).find('success').text();
+
+                        if (success === 'true') {
+                            $('#resultado2').text('Login realizado com sucesso!');
+                            $('#resultado').text('');
+                        } else {
+                            $('#resultado2').text('Nome de usuário ou senha incorretos.');
+                            $('#resultado').text('');
+                        }
+                    },
+                });
+        });
+        // $('#btnCadastrar').click(function() {
+        //     const username = $('#username').val();
+
+        //     $.ajax({
+        //     url: 'http://localhost:9000/cadastrar-usuario',
+        //     method: 'POST',
+        //     data: username,
+        //     contentType: 'application/xml',
+        //     dataType: 'xml',
+        //     success: function(response) {
+        //         $('#resultado').text('Usuário cadastrado com sucesso!');
+        //     },
+        //     error: function() {
+        //         alert('Erro ao cadastrar o usuário.');
+        //     }
+        //     });
+        // });
+        });
+    
+
+
+    </script>
+</head>
+<body>
+    <div class="container-fluid d-flex justify-content-center" style="flex-direction: column;">
+        <div class="cadastro">
+            <h1>Cadastro de Usuário</h1>
+            <div class="row" style="flex-direction: column;">
+                <div class="col d-flex mb-2" style="flex-direction: column; position: relative; align-items: center; margin-top: 30px;">
+                    <input type="text" id="username" placeholder="Nome de usuário">
+                    <div class="resultado">
+                        <div class="col">
+                            <div id="resultado"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="col d-flex mt-3" style="flex-direction: column; align-items: center; margin-top: 10px; position: relative;">    
+                    <input type="password" id="password" placeholder="Senha"><br><br>
+                    <div class="resultado">
+                        <div class="col">
+                            <div id="resultado2"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col d-flex justify-content-end">
+                    <button id="btnLogin" class="btnLogin"> Login </button>
+                    <button id="btnVerificar" class="btnCadastrar"> Cadastrar </button>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>

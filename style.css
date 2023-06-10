@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandiflora+One&family=Josefin+Slab:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Poppins:wght@400;500;600;700&display=swap');
+.container-fluid {
+    background-color: #E2DCCD;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cadastro {
+    position: relative;
+    width: 80%;
+    height: 60%;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 5px;
+    background-color: #00A8FF;
+    justify-content: center ;
+    box-shadow: 4px 4px 1px;
+    font-family: 'Josefin Slab', serif;
+    overflow: hidden;
+}
+
+.btn {
+    margin-right: 10px;
+}
+
+input {
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    box-shadow: 3px 3px 1px;
+}
+
+#resultado {
+    height: 10px; /* Altura fixa */
+    margin-top: 5px;
+    margin-bottom: 3px; /* Espaçamento acima do resultado */
+    padding-left: 10px;
+    margin-left: 60px;
+    text-align: left;
+    top: 20px;
+}
+
+.resultado {
+    position: absolute;
+    width: 320px;
+    top: 25px;
+}
+
+.btnLogin {
+    background: #FBCA1F;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 2px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    border-radius: 10px;
+    margin-right: 5px;
+    position: absolute;  
+    bottom: 5px;
+    right: 130px;
+  }
+
+  .btnCadastrar {
+    background: red;
+    font-family: inherit;
+    padding: 0.6em 1.3em;
+    font-weight: 900;
+    font-size: 18px;
+    border: 2px solid black;
+    border-radius: 0.4em;
+    box-shadow: 0.1em 0.1em;
+    border-radius: 10px;
+    position: absolute;  
+    bottom: 5px;
+  }
+  
+  button:hover {
+    transform: translate(-0.05em, -0.05em);
+    box-shadow: 0.15em 0.15em;
+  }
+  
+  button:active {
+    transform: translate(0.05em, 0.05em);
+    box-shadow: 0.05em 0.05em;
+  }
